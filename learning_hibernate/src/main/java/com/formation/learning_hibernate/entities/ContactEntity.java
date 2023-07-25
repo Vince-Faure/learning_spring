@@ -15,16 +15,19 @@ public class ContactEntity {
     private Integer id;
 
     @NotBlank
-    @Size(min= 3, max=30)
-    @Pattern(regexp="^[\\p{L}\\- ]{4,100}$", flags ={Pattern.Flag.CASE_INSENSITIVE,Pattern.Flag.DOTALL})
+    @Pattern(
+        regexp="^[\\p{L}\\- ]{4,100}$", 
+        flags ={Pattern.Flag.CASE_INSENSITIVE,Pattern.Flag.DOTALL},
+        message="{contact.name.regex.message}"
+        )
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Le mail est obligatoire")
     @Email
     private String email;
 
-    @NotBlank
-    @Size(min=25, max=1000)
+    @NotBlank(message = "Le message est obligatoire")
+    @Size(min=25, max=1000, message="le message doit contenir de 25 à 1000 caractères")
     private String message;
 
 }
